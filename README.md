@@ -1,4 +1,4 @@
-This project was made at the 2023 CodeDay event in KNUST.
+This project was made at the 2023 CodeDay event held at The Kwame Nkrumah University of Science and Technology (KNUST).
 
 A simple web application which allows users to create mini documentation of their code.
 It also enables the documentation to be saved or captured as a PDF document.
