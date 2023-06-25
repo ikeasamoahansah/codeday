@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+{%block body%}
+<h1 class="text-center" style="padding-top: 10px;">Welcome to the Update Page!</h1>
+<br>
+{%if msg%}
+    <h3>{{msg}}</h3>
+{%endif%}
+<div class="form-group">
+    <form method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">Update!</button>
+    </form>
+</div>
+
+{%endblock%}

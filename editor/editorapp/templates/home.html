@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{%block body%}
+
+<br>
+    {% comment %} <a href="{% url 'post' %} " style="text-decoration:none; margin:20px;"class="m-auto bg-dark p-1 rounded shadow-md text-white">New Note</a> {% endcomment %}
+
+
+<main class="container p-3">
+
+    <div class="row">
+        
+        {%for note in notes%}
+
+            
+    
+            {%if note.owner == request.user%}
+    
+                {% comment %} <a href="{% url 'post-view' note.id %}">
+                    <h1> {{note.title}} </h1>
+                    <p>{{note.text}}</p>
+                </a> {% endcomment %}
+                
+                    <div class="d-flex flex-column align-items-stretch flex-shrink-0 col-3 bg-white shadow-sm p-3 m-1">
+                        <a href="{% url 'post-view' note.id %}"
+                            class="list-group-item list-group-item-action py-3 lh-sm rounded m-1 move text-white" style="backdrop-filter: blur(2px); border: 0px;">
+                            <div class="d-flex w-100 align-items-center justify-content-between inner">
+                            <strong class="mb-1">{{note.title}}</strong>
+                            </div>
+                            <div class="col-10 mb-1 small text-secondary">{{note.text}}</div>
+                        </a>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-danger badge" name="note-id" value="{{note.id}}">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+    
+            {%endif%}
+    
+        {% endfor %}
+        
+    </div>
+    
+
+</main>
+
+
+{%endblock%}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+{%block body%}
+<h1 class="text-center" style="padding-top: 10px;">Welcome to the Post Page!</h1>
+<br>
+
+<div class="container">
+    <form method='post'>
+        {%csrf_token%}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">Post!</button>
+    </form>
+</div>
+
+{% comment %} <script>
+    var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+        mode: "xml",
+        theme: "darcula",
+        lineNumbers: true,
+        autoCloseTags: true,
+    });
+    editor.setSize("750", "250")
+</script> {% endcomment %}
+{%endblock%}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{%block body%}
+
+<div class="container">
+
+    {%if request.user == note.owner%}
+        <a href="{% url 'post-snip' %}">New Snippet</a>
+        <a href="{% url 'edit-note' note.id %}">Edit Note</a>
+    {%endif%}
+
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-outline-primary" type="submit">Download Page</button>
+    </form>
+
+        <h1>{{note.title}}</h1>
+        <p>{{note.text}}</p>
+            
+        {%for snippet in snippets%}
+            <div class="code-snippets">
+                <span><strong>{{snippet.title}}</strong></span> | <span style="color:grey;">{{snippet.language}}</span>
+                <br>
+                <a href="{% url 'edit-snippet' snippet.id %}">Edit Snip</a>
+                <pre><code class="language-{{snippet.language}}" tabindex="0">{{snippet.code}}</code></pre>
+            </div>
+            {% comment %} <form method="post">
+                {% csrf_token %}
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-danger badge" name="snip-id" value="{{snip.id}}">Delete</button>
+                </div>
+            </form> {% endcomment %}
+        {%endfor%}
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body" id="modalContent">
+          {{form}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{%endblock%}
